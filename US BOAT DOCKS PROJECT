@@ -1,0 +1,57 @@
+# This project is an example of what I worked on at my previous employer as a data analyst for a construction company.
+# I created a table with all the customers information and data 
+# I performed analytics on the data using SQL
+
+CREATE TABLE US_Boat_Docks (
+    customer_id INTEGER PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    job_description VARCHAR(255) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    contact_number VARCHAR(15) NOT NULL
+);
+INSERT INTO US_Boat_Docks (customer_id, customer_name, address, job_description, amount, contact_number)
+VALUES
+(1, 'Mary Albers', '123 Lakeshore Dr, Lake Ozark, MO 65049', 'Dock construction', 5000.00, '573-555-1234'),
+(2, 'Jane Smith', '456 Waterway Ln, Lake Ozark, MO 65049', 'Dock repair', 2500.50, '573-555-5678'),
+(3, 'Mike Johnson', '789 Sunset Blvd, Lake Ozark, MO 65049', 'Dock modification', 3500.75, '573-555-2345'),
+(4, 'Emily Davis', '321 Boat Rd, Lake Ozark, MO 65049', 'Dock construction', 7000.00, '573-555-6789'),
+(5, 'David Williams', '654 Marina Blvd, Lake Ozark, MO 65049', 'Dock repair', 2200.00, '573-555-3456'),
+(6, 'Sophia Miller', '987 Lakeview St, Lake Ozark, MO 65049', 'Dock modification', 4000.00, '573-555-7890'),
+(7, 'James Brown', '123 Dockside Way, Lake Ozark, MO 65049', 'Dock construction', 8000.00, '573-555-4567'),
+(8, 'Olivia Wilson', '456 Harbor Dr, Lake Ozark, MO 65049', 'Dock repair', 1500.25, '573-555-2346'),
+(9, 'Liam Moore', '789 Bayview Ave, Lake Ozark, MO 65049', 'Dock modification', 3200.00, '573-555-8765'),
+(10, 'Ava Taylor', '321 Marina Rd, Lake Ozark, MO 65049', 'Dock construction', 6000.00, '573-555-9876');
+
+
+# I performed analytics with the data I have made 
+
+SELECT * FROM US_Boat_Docks;
+
+--Find the average amount spent by customers on each job description
+
+SELECT job_description, AVG(amount) AS average_amount
+FROM US_Boat_Docks
+GROUP BY job_description
+ORDER BY average_amount DESC;
+
+--Retrieve the total amount spent on repairs (dock repair) for each customer, including their name and job description
+
+SELECT customer_name, job_description, SUM(amount) AS total_spent
+FROM US_Boat_Docks
+WHERE job_description = 'Dock repair'
+GROUP BY customer_name, job_description
+ORDER BY total_spent DESC;
+
+--Retrieve customers who requested a dock construction job with a cost greater than the average for "Dock construction"
+
+SELECT customer_name, job_description, amount
+FROM US_Boat_Docks
+WHERE job_description = 'Dock construction'
+AND amount > (SELECT AVG(amount) FROM US_Boat_Docks WHERE job_description = 'Dock construction');
+
+--Retrieve all customers located on Waterway Lane or Harbor Drive
+
+SELECT customer_name, address, job_description
+FROM US_Boat_Docks
+WHERE address LIKE '%Waterway Ln%' OR address LIKE '%Harbor Dr%';
