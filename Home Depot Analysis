@@ -1,0 +1,133 @@
+-- I created this data, which might resemble Home Depot's data analysis
+
+CREATE TABLE Products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(100) NOT NULL,
+    category VARCHAR(50),
+    price DECIMAL(10, 2) NOT NULL,
+    stock_quantity INT NOT NULL
+);
+
+INSERT INTO Products (product_name, category, price, stock_quantity)
+VALUES
+('Cordless Drill', 'Tools', 99.99, 50),
+('Paint Bucket', 'Paint', 24.99, 100),
+('Lawn Mower', 'Garden', 299.99, 20),
+('Ceiling Fan', 'Electrical', 89.99, 35),
+('Power Saw', 'Tools', 129.99, 40);
+
+
+--Customers Table 
+
+CREATE TABLE Customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    phone_number VARCHAR(20),
+    address VARCHAR(255)
+);
+
+INSERT INTO Customers (customer_name, email, phone_number, address)
+VALUES
+('John Smith', 'john.smith@example.com', '555-1234', '123 Maple St'),
+('Jane Doe', 'jane.doe@example.com', '555-5678', '456 Oak St'),
+('Mike Johnson', 'mike.johnson@example.com', '555-9876', '789 Pine St'),
+('Emily Davis', 'emily.davis@example.com', '555-1122', '321 Birch St');
+
+-- Order's Table 
+
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    product_id INT NOT NULL,
+    order_date DATE,
+    quantity INT,
+    total_price DECIMAL(10, 2),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
+
+INSERT INTO Orders (customer_id, product_id, order_date, quantity, total_price)
+VALUES
+(1, 1, '2025-01-15', 2, 199.98),
+(2, 3, '2025-01-16', 1, 299.99),
+(3, 2, '2025-01-17', 5, 124.95),
+(4, 4, '2025-01-18', 1, 89.99);
+
+-- Employees Table 
+
+CREATE TABLE Employees (
+    employee_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    position VARCHAR(50),
+    salary DECIMAL(10, 2)
+);
+
+INSERT INTO Employees (first_name, last_name, position, salary)
+VALUES
+('Chris', 'Carter', 'Cashier', 30000.00),
+('Sophia', 'Brown', 'Floor Manager', 50000.00),
+('David', 'Taylor', 'Sales Associate', 35000.00),
+('Rachel', 'Green', 'Inventory Specialist', 40000.00);
+
+
+
+-- Below is the SQL query I created to extract data from the table mentioned above.
+
+--Retrieve All Orders with Customer and Product Details
+
+SELECT 
+    Orders.order_id,
+    Customers.customer_name,
+    Products.product_name,
+    Orders.quantity,
+    Orders.total_price,
+    Orders.order_date
+FROM 
+    Orders
+JOIN 
+    Customers ON Orders.customer_id = Customers.customer_id
+JOIN 
+    Products ON Orders.product_id = Products.product_id;
+
+--Find Total Sales for Each Product
+
+SELECT 
+    Products.product_name,
+    SUM(Orders.quantity) AS total_quantity_sold,
+    SUM(Orders.total_price) AS total_sales
+FROM 
+    Orders
+JOIN 
+    Products ON Orders.product_id = Products.product_id
+GROUP BY 
+    Products.product_name
+ORDER BY 
+    total_sales DESC;
+
+--Get Customers Who Have Spent More Than $200
+
+SELECT 
+    Customers.customer_name,
+    SUM(Orders.total_price) AS total_spent
+FROM 
+    Orders
+JOIN 
+    Customers ON Orders.customer_id = Customers.customer_id
+GROUP BY 
+    Customers.customer_name
+HAVING 
+    SUM(Orders.total_price) > 200;
+
+--List Products with Low Stock
+
+SELECT 
+    product_name,
+    stock_quantity
+FROM 
+    Products
+WHERE 
+    stock_quantity < 30;
+
+
