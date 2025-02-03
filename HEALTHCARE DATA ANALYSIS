@@ -1,0 +1,115 @@
+-- I created Patient Medical Records Table with made up values to write queries
+
+CREATE TABLE Patients (
+    PatientID INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    DateOfBirth DATE NOT NULL,
+    Gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    ContactNumber VARCHAR(15),
+    Email VARCHAR(100),
+    Address VARCHAR(255),
+    BloodType ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'),
+    MedicalHistory TEXT,
+    AdmissionDate DATETIME,
+    DischargeDate DATETIME,
+    DoctorID INT,
+    RoomNumber VARCHAR(10),
+    InsuranceProvider VARCHAR(100),
+    PolicyNumber VARCHAR(50),
+    EmergencyContactName VARCHAR(100),
+    EmergencyContactNumber VARCHAR(15),
+    PRIMARY KEY (PatientID)
+);
+
+INSERT INTO Patients (FirstName, LastName, DateOfBirth, Gender, ContactNumber, Email, Address, BloodType, MedicalHistory, AdmissionDate, DischargeDate, DoctorID, RoomNumber, InsuranceProvider, PolicyNumber, EmergencyContactName, EmergencyContactNumber) VALUES
+('John', 'Doe', '1985-06-15', 'Male', '1234567890', 'john.doe@example.com', '123 Main St', 'O+', 'Diabetes', '2024-01-10 08:00:00', '2024-01-15 10:00:00', 1, '101A', 'ABC Health', 'POL12345', 'Jane Doe', '0987654321'),
+('Mary', 'Smith', '1990-09-22', 'Female', '2345678901', 'mary.smith@example.com', '456 Oak Ave', 'A-', 'Hypertension', '2024-01-05 12:00:00', '2024-01-10 14:00:00', 2, '102B', 'XYZ Insurance', 'POL67890', 'John Smith', '0876543210'),
+('Robert', 'Johnson', '1978-03-11', 'Male', '3456789012', 'robert.johnson@example.com', '789 Pine Rd', 'B+', 'Asthma', '2024-01-12 09:30:00', '2024-01-18 11:45:00', 3, '103C', 'DEF Health', 'POL54321', 'Alice Johnson', '0765432109'),
+('Emily', 'Davis', '1989-07-04', 'Female', '4567890123', 'emily.davis@example.com', '321 Maple Blvd', 'AB-', 'Migraine', '2024-01-08 15:00:00', '2024-01-13 17:30:00', 4, '104D', 'GHI Coverage', 'POL98765', 'Mark Davis', '0654321098'),
+('Michael', 'Brown', '1995-12-30', 'Male', '5678901234', 'michael.brown@example.com', '654 Cedar St', 'O-', 'Healthy', '2024-01-06 07:00:00', '2024-01-09 09:00:00', 5, '105E', 'JKL Insurance', 'POL24680', 'Lisa Brown', '0543210987'),
+('Sarah', 'Miller', '1982-05-14', 'Female', '6789012345', 'sarah.miller@example.com', '987 Birch Ln', 'A+', 'Allergy', '2024-01-07 10:30:00', '2024-01-11 12:00:00', 6, '106F', 'MNO Health', 'POL13579', 'David Miller', '0432109876'),
+('James', 'Wilson', '1975-11-23', 'Male', '7890123456', 'james.wilson@example.com', '543 Spruce Ct', 'B-', 'Heart Condition', '2024-01-09 13:00:00', '2024-01-14 15:00:00', 7, '107G', 'PQR Coverage', 'POL97531', 'Nancy Wilson', '0321098765'),
+('Linda', 'Moore', '1993-08-19', 'Female', '8901234567', 'linda.moore@example.com', '231 Elm Dr', 'AB+', 'Healthy', '2024-01-10 16:45:00', '2024-01-15 18:30:00', 8, '108H', 'STU Insurance', 'POL86420', 'Henry Moore', '0210987654'),
+('William', 'Taylor', '1987-02-28', 'Male', '9012345678', 'william.taylor@example.com', '675 Willow Way', 'O+', 'Diabetes', '2024-01-08 07:30:00', '2024-01-12 09:45:00', 9, '109I', 'VWX Health', 'POL75319', 'Emma Taylor', '0109876543'),
+('Sophia', 'Anderson', '1980-04-18', 'Female', '9123456789', 'sophia.anderson@example.com', '112 River St', 'A-', 'Arthritis', '2024-01-11 08:20:00', '2024-01-16 10:15:00', 10, '110J', 'ABC Health', 'POL32145', 'Chris Anderson', '0198765432'),
+('Daniel', 'Thomas', '1972-09-10', 'Male', '9234567890', 'daniel.thomas@example.com', '555 Lakeview Dr', 'B+', 'Cancer Survivor', '2024-01-14 11:00:00', '2024-01-20 13:45:00', 11, '111K', 'XYZ Insurance', 'POL56789', 'Olivia Thomas', '0987654322'),
+('Jessica', 'Harris', '1998-12-05', 'Female', '9345678901', 'jessica.harris@example.com', '777 Sunset Blvd', 'O-', 'Healthy', '2024-01-09 14:30:00', '2024-01-12 16:20:00', 12, '112L', 'DEF Health', 'POL67891', 'Brian Harris', '0876543221'),
+('David', 'Martinez', '1965-07-22', 'Male', '9456789012', 'david.martinez@example.com', '999 Ocean Ave', 'AB+', 'Heart Disease', '2024-01-07 09:10:00', '2024-01-13 11:55:00', 13, '113M', 'GHI Coverage', 'POL78912', 'Anna Martinez', '0765432210'),
+('Laura', 'White', '1984-02-14', 'Female', '9567890123', 'laura.white@example.com', '314 Valley Rd', 'A+', 'Healthy', '2024-01-05 13:40:00', '2024-01-09 15:25:00', 14, '114N', 'JKL Insurance', 'POL89123', 'Michael White', '0654322109'),
+('Kevin', 'Garcia', '1970-11-03', 'Male', '9678901234', 'kevin.garcia@example.com', '125 Park Ave', 'B-', 'Hypertension', '2024-01-06 10:00:00', '2024-01-12 12:30:00', 15, '115O', 'MNO Health', 'POL90234', 'Rachel Garcia', '0543219876'),
+('Emma', 'Rodriguez', '1991-06-25', 'Female', '9789012345', 'emma.rodriguez@example.com', '854 Highland St', 'O+', 'Healthy', '2024-01-09 14:15:00', '2024-01-14 16:45:00', 16, '116P', 'PQR Coverage', 'POL45678', 'Liam Rodriguez', '0432109765'),
+('Matthew', 'Lopez', '1983-04-17', 'Male', '9890123456', 'matthew.lopez@example.com', '741 Greenway Dr', 'A-', 'Asthma', '2024-01-10 09:30:00', '2024-01-13 11:50:00', 17, '117Q', 'STU Insurance', 'POL56789', 'Sophia Lopez', '0321098754'),
+('Olivia', 'Gonzalez', '1976-12-29', 'Female', '9901234567', 'olivia.gonzalez@example.com', '369 Cedar Ln', 'AB-', 'Diabetes', '2024-01-07 08:40:00', '2024-01-11 10:55:00', 18, '118R', 'VWX Health', 'POL67890', 'Noah Gonzalez', '0210987643'),
+('Ethan', 'Wilson', '1996-02-18', 'Male', '9012345678', 'ethan.wilson@example.com', '258 Willow Dr', 'O-', 'Healthy', '2024-01-08 13:25:00', '2024-01-12 15:35:00', 19, '119S', 'ABC Health', 'POL78901', 'Ava Wilson', '0109876532'),
+('Lucas', 'Scott', '1988-09-19', 'Male', '9123456780', 'lucas.scott@example.com', '789 Hilltop Rd', 'A+', 'Healthy', '2024-01-06 10:30:00', '2024-01-11 12:45:00', 20, '120T', 'XYZ Insurance', 'POL34567', 'Emma Scott', '0192837465'),
+('Ava', 'Nelson', '1974-07-08', 'Female', '9234567891', 'ava.nelson@example.com', '654 Sunset Ave', 'B-', 'Arthritis', '2024-01-09 14:10:00', '2024-01-13 16:25:00', 21, '121U', 'DEF Health', 'POL45678', 'Liam Nelson', '0182736459'),
+('Mason', 'Carter', '1993-11-25', 'Male', '9345678902', 'mason.carter@example.com', '321 Meadow Ln', 'O+', 'Hypertension', '2024-01-07 09:20:00', '2024-01-12 11:35:00', 22, '122V', 'GHI Coverage', 'POL56789', 'Sophia Carter', '0173645289'),
+('Isabella', 'Mitchell', '1982-03-14', 'Female', '9456789013', 'isabella.mitchell@example.com', '999 Redwood St', 'AB-', 'Asthma', '2024-01-08 13:15:00', '2024-01-14 15:50:00', 23, '123W', 'JKL Insurance', 'POL67890', 'Noah Mitchell', '0164527389'),
+('Ethan', 'Perez', '1977-05-30', 'Male', '9567890124', 'ethan.perez@example.com', '567 Elm St', 'A-', 'Diabetes', '2024-01-10 08:05:00', '2024-01-15 10:40:00', 24, '124X', 'MNO Health', 'POL78901', 'Olivia Perez', '0157384926'),
+('Lily', 'Hernandez', '1990-10-21', 'Female', '9678901235', 'lily.hernandez@example.com', '321 Willow St', 'O+', 'Healthy', '2024-01-11 10:00:00', '2024-01-16 12:30:00', 25, '125Y', 'PQR Coverage', 'POL89012', 'Lucas Hernandez', '0148392765'),
+('Benjamin', 'Adams', '1969-08-12', 'Male', '9789012346', 'benjamin.adams@example.com', '654 Maple Ct', 'B+', 'Cancer Survivor', '2024-01-05 12:15:00', '2024-01-09 14:20:00', 26, '126Z', 'STU Insurance', 'POL90123', 'Emma Adams', '0139482756'),
+('Sophia', 'Nguyen', '1983-02-17', 'Female', '9876543210', 'sophia.nguyen@example.com', '852 Broadway St', 'A+', 'Healthy', '2024-01-05 10:10:00', '2024-01-10 12:20:00', 27, '127A', 'XYZ Insurance', 'POL12367', 'Nathan Nguyen', '0123456789'),
+('Jacob', 'Lee', '1971-05-23', 'Male', '8765432109', 'jacob.lee@example.com', '741 Sunset Blvd', 'B-', 'Heart Condition', '2024-01-06 14:30:00', '2024-01-11 16:45:00', 28, '128B', 'ABC Health', 'POL23478', 'Emily Lee', '0234567891'),
+('Olivia', 'Kim', '1992-11-12', 'Female', '7654321098', 'olivia.kim@example.com', '963 Highland Ave', 'O+', 'Allergy', '2024-01-07 08:25:00', '2024-01-13 10:40:00', 29, '129C', 'DEF Health', 'POL34589', 'Liam Kim', '0345678912'),
+('Daniel', 'Clark', '1985-06-30', 'Male', '6543210987', 'daniel.clark@example.com', '159 Pine St', 'AB+', 'Healthy', '2024-01-08 12:50:00', '2024-01-14 15:05:00', 30, '130D', 'GHI Coverage', 'POL45690', 'Sophia Clark', '0456789123'),
+('Emma', 'Lewis', '1979-03-07', 'Female', '5432109876', 'emma.lewis@example.com', '357 Lakeview Dr', 'A-', 'Diabetes', '2024-01-09 07:45:00', '2024-01-15 09:30:00', 31, '131E', 'JKL Insurance', 'POL56701', 'Noah Lewis', '0567891234'),
+('William', 'Young', '1996-09-18', 'Male', '4321098765', 'william.young@example.com', '852 Cedar Rd', 'O-', 'Healthy', '2024-01-10 13:15:00', '2024-01-16 14:50:00', 32, '132F', 'MNO Health', 'POL67812', 'Ava Young', '0678912345'),
+('Charlotte', 'Hall', '1981-12-25', 'Female', '3210987654', 'charlotte.hall@example.com', '753 Willow Ln', 'B+', 'Arthritis', '2024-01-11 09:55:00', '2024-01-17 11:40:00', 33, '133G', 'PQR Coverage', 'POL78923', 'Lucas Hall', '0789123456'),
+('James', 'Allen', '1974-08-20', 'Male', '2109876543', 'james.allen@example.com', '654 Maple Dr', 'AB-', 'Hypertension', '2024-01-12 14:40:00', '2024-01-18 16:15:00', 34, '134H', 'STU Insurance', 'POL89034', 'Emma Allen', '0891234567'),
+('Grace', 'King', '1987-07-13', 'Female', '1098765432', 'grace.king@example.com', '321 Spruce Ct', 'A+', 'Healthy', '2024-01-13 08:10:00', '2024-01-19 09:55:00', 35, '135I', 'VWX Health', 'POL90145', 'Ethan King', '0912345678'),
+('Henry', 'Wright', '1968-10-05', 'Male', '0987654321', 'henry.wright@example.com', '987 Elm Ave', 'O+', 'Diabetes', '2024-01-14 15:30:00', '2024-01-20 17:20:00', 36, '136J', 'ABC Health', 'POL01256', 'Olivia Wright', '0123456789'),
+('Zoe', 'Lopez', '1994-04-22', 'Female', '9876543201', 'zoe.lopez@example.com', '258 River Rd', 'B-', 'Healthy', '2024-01-15 11:25:00', '2024-01-21 13:10:00', 37, '137K', 'XYZ Insurance', 'POL34567', 'Nathan Lopez', '0234567891'),
+('Liam', 'Hill', '1980-01-31', 'Male', '8765432098', 'liam.hill@example.com', '147 Highland Rd', 'A-', 'Asthma', '2024-01-16 09:40:00', '2024-01-22 11:50:00', 38, '138L', 'DEF Health', 'POL45678', 'Emily Hill', '0345678912'),
+('Mia', 'Scott', '1973-11-15', 'Female', '7654320987', 'mia.scott@example.com', '963 Oak Ave', 'O+', 'Hypertension', '2024-01-17 14:05:00', '2024-01-23 16:25:00', 39, '139M', 'GHI Coverage', 'POL56789', 'Liam Scott', '0456789123'),
+('Noah', 'Green', '1997-06-08', 'Male', '6543209876', 'noah.green@example.com', '852 Maple Dr', 'AB+', 'Healthy', '2024-01-18 08:55:00', '2024-01-24 10:35:00', 40, '140N', 'JKL Insurance', 'POL67890', 'Sophia Green', '0567891234'),
+('Chloe', 'Adams', '1986-05-04', 'Female', '5432098765', 'chloe.adams@example.com', '357 Sunset Blvd', 'A+', 'Cancer Survivor', '2024-01-19 12:20:00', '2024-01-25 14:15:00', 41, '141O', 'MNO Health', 'POL78901', 'Noah Adams', '0678912345')
+
+;
+
+
+-- Find patients who were admitted in January 2024 and have a medical condition related to 'Diabetes
+
+SELECT FirstName, LastName, MedicalHistory, AdmissionDate
+FROM Patients
+WHERE MedicalHistory LIKE '%Diabetes%' AND AdmissionDate BETWEEN '2024-01-01' AND '2024-01-31';
+
+--Find the patients with the longest and shortest hospital stays (based on admission and discharge dates)
+
+SELECT FirstName, LastName, DATEDIFF(DischargeDate, AdmissionDate) AS HospitalStayDays
+FROM Patients
+WHERE DischargeDate IS NOT NULL
+ORDER BY HospitalStayDays DESC
+LIMIT 1;
+
+SELECT FirstName, LastName, DATEDIFF(DischargeDate, AdmissionDate) AS HospitalStayDays
+FROM Patients
+WHERE DischargeDate IS NOT NULL
+ORDER BY HospitalStayDays ASC
+LIMIT 1;
+
+--Find the average length of hospital stays for each blood type
+
+SELECT BloodType, AVG(DATEDIFF(DischargeDate, AdmissionDate)) AS AvgHospitalStay
+FROM Patients
+WHERE DischargeDate IS NOT NULL
+GROUP BY BloodType;
+
+--Find patients who have an emergency contact whose name is different from their last name (i.e., their emergency contact is not a family member)
+
+SELECT FirstName, LastName, EmergencyContactName, EmergencyContactNumber
+FROM Patients
+WHERE EmergencyContactName != CONCAT(FirstName, ' ', LastName);
+
+--Find all patients who have been discharged more than 5 days ago but still have an active insurance policy 
+
+SELECT FirstName, LastName, DischargeDate, InsuranceProvider, PolicyNumber
+FROM Patients
+WHERE DATEDIFF(CURDATE(), DischargeDate) > 5
+AND CURDATE() <= ADDDATE(DischargeDate, INTERVAL 365 DAY);
+
+--Find patients who have both a health condition and are not "Healthy" in their medical history (exclude patients who only have "Healthy" listed)
+
+SELECT FirstName, LastName, MedicalHistory
+FROM Patients
+WHERE MedicalHistory NOT LIKE '%Healthy%' AND MedicalHistory IS NOT NULL;
